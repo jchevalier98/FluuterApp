@@ -6,13 +6,12 @@ class MenuItem extends StatelessWidget {
   final Function onTap;
 
   const MenuItem({Key key, this.icon, this.title, this.onTap}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         child: Row(
           children: <Widget>[
             Icon(
@@ -21,11 +20,11 @@ class MenuItem extends StatelessWidget {
               size: 30,
             ),
             SizedBox(
-              width: 20,
+              width: 15,
             ),
             Text(
               title,
-              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 26, color: Colors.white),
+              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20, color: Colors.white),
             )
           ],
         ),

@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:navigation_bar/bloc.navigation_bloc/navigation_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'menu_item.dart';
@@ -16,7 +18,7 @@ class _SideBarState extends State<SideBar>  with SingleTickerProviderStateMixin<
   Stream<bool> isSideBarOpenedStream;
   StreamSink<bool> isSideBarOpenedSink;
   AnimationController _animationController; 
-  final _animationDuration = const Duration(milliseconds: 250);
+  final _animationDuration = const Duration(milliseconds: 100);
 
   @override
   void initState() {
@@ -54,7 +56,6 @@ class _SideBarState extends State<SideBar>  with SingleTickerProviderStateMixin<
   Widget build(BuildContext context) {
 
     final screenWidth = MediaQuery.of(context).size.width;
-
     return StreamBuilder<bool>(
       initialData: false,
       stream: isSideBarOpenedStream,
@@ -74,18 +75,18 @@ class _SideBarState extends State<SideBar>  with SingleTickerProviderStateMixin<
                   child: Column(
                     children: <Widget>[
                       SizedBox(
-                        height: 100,
+                        height: 80,
                       ),
                       ListTile(
                         title: Text(
                           "Prateek",
-                          style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w800),
+                          style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800),
                         ),
                         subtitle: Text(
-                          "www.techieblossom.com",
+                          "jchevalier98",
                           style: TextStyle(
                             color: Color(0xFF1BB5FD),
-                            fontSize: 18,
+                            fontSize: 16,
                           ),
                         ),
                         leading: CircleAvatar(
@@ -97,7 +98,7 @@ class _SideBarState extends State<SideBar>  with SingleTickerProviderStateMixin<
                         ),
                       ),
                       Divider(
-                        height: 64,
+                        height: 44,
                         thickness: 0.5,
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
@@ -105,34 +106,34 @@ class _SideBarState extends State<SideBar>  with SingleTickerProviderStateMixin<
                       ),
                       MenuItem(
                         icon: Icons.home,
-                        title: "Home",
+                        title: "Inicio",
                         onTap: () {
                           onIconPressed();
-                          //BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HomePageClickedEvent);
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HomePageClickedEvent);
                         },
                       ),
                       MenuItem(
                         icon: Icons.person,
-                        title: "My Account",
+                        title: "Perfil",
                         onTap: () {
                           onIconPressed();
-                          //BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.MyAccountClickedEvent);
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.AccountClickedEvent);
                         },
                       ),
                       MenuItem(
                         icon: Icons.shopping_basket,
-                        title: "My Orders",
+                        title: "Mis Pedidos",
                         onTap: () {
                           onIconPressed();
-                          //BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.MyOrdersClickedEvent);
+                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.OrdersClickedEvent);
                         },
                       ),
                       MenuItem(
                         icon: Icons.card_giftcard,
-                        title: "Wishlist",
+                        title: "Mi Lista Deseos",
                       ),
                       Divider(
-                        height: 64,
+                        height: 44,
                         thickness: 0.5,
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
@@ -140,11 +141,11 @@ class _SideBarState extends State<SideBar>  with SingleTickerProviderStateMixin<
                       ),
                       MenuItem(
                         icon: Icons.settings,
-                        title: "Settings",
+                        title: "Configuraciones",
                       ),
                       MenuItem(
                         icon: Icons.exit_to_app,
-                        title: "Logout",
+                        title: "Salir",
                       ),
                     ],
                   ),

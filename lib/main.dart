@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'sidebar/sidebar_layout.dart';
+import 'package:navigation_bar/pages/main_layout.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         primaryColor: Colors.white
       ),
-      home: SideBarLayout()
+      home: MainLayout()
     );
   }
 }
