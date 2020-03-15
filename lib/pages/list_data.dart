@@ -12,7 +12,7 @@ class ListData extends StatelessWidget {
           separatorBuilder: (BuildContext context, int index) {
             return Container(
               color: Colors.blueAccent.withOpacity(0.15),
-              height: 5.0,
+              height: 5.0, 
             );
           },
           /*children: <Widget>[
