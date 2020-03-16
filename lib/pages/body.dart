@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_bar/pages/selector.dart';
+import 'package:navigation_bar/util/separator.dart';
 
 import 'expensas.dart';
 import 'grafics.dart';
@@ -14,10 +15,7 @@ class Body extends StatelessWidget {
           Selector(),
           Expensas(),
           Grafics(),
-          Container(
-            color: Colors.blueAccent.withOpacity(0.15),
-            height: 24.0,
-          ),
+          Separator(space: 20.0),
           ListData()
         ],
       ),
