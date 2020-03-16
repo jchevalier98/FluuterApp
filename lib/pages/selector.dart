@@ -14,7 +14,7 @@ class Selector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
-      size: Size.fromHeight(70.0),
+      size: Size.fromHeight(60.0),
       child: PageView(
         //controller: _pageController,
         children: <Widget>[

@@ -11,7 +11,7 @@ class ListData extends StatelessWidget {
           itemCount: 15,
           itemBuilder: (BuildContext context, int index) => Item(icon : FontAwesomeIcons.shoppingCart, name: "Ropa", percent: 12, amount: 145.21),
           separatorBuilder: (BuildContext context, int index) {
-            return Separator(space: 5.0,);
+            return Separator(space: 3.0,);
           },
       ),
     );

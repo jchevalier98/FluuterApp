@@ -14,8 +14,26 @@ class Body extends StatelessWidget {
         children: <Widget>[
           Selector(),
           Expensas(),
-          Grafics(),
-          Separator(space: 20.0),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Grafics(),
+          ),
+          //Separator(space: 20.0),
+          Container(
+            color: Colors.blueAccent.withOpacity(0.15),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  "Detalle de gastos",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.blueGrey
+                  ),
+                )
+              ),
+            ),
+          ),
           ListData()
         ],
       ),

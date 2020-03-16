@@ -5,7 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:navigation_bar/pages/body.dart';
 
 class Home extends StatelessWidget with NavigationStates{
-   @override
+  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
@@ -25,7 +26,7 @@ class Home extends StatelessWidget with NavigationStates{
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF262AAA),
+        backgroundColor: const Color(0xFF42c119),
         child: Icon(Icons.add),
         onPressed: (){}
       ),

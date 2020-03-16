@@ -9,8 +9,8 @@ class Expensas extends StatelessWidget {
           child: Text(
             "\$2341.20",
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 40.0,
+              fontWeight: FontWeight.w500,
+              fontSize: 35.0,
             ),
           ),
         ),
@@ -18,7 +18,7 @@ class Expensas extends StatelessWidget {
           child: Text(
             "Total de gastos",
             style: TextStyle(
-              fontSize: 20.0,
+              fontSize: 18.0,
               color: Colors.blueGrey
             ),
           ),
