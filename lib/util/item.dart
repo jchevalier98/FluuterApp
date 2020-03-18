@@ -12,16 +12,16 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, size: 30.0, color: Colors.cyan),
+      leading: Icon(icon, size: 30.0, color: const Color(0xFF262AAA)),
       title: Text(
         name,
         style: TextStyle(
           fontSize: 16.0,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w400,
         ),
       ),
       subtitle: Text(
-        "$percent del total",
+        "%$percent del total",
         style: TextStyle(
           fontSize: 12.0,
           color: Colors.blueGrey

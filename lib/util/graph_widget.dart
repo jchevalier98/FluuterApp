@@ -1,50 +1,29 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart';
 
 class GraphWidget extends StatefulWidget {
+
+  final List<double> data;
+  const GraphWidget({Key key, this.data}) : super(key: key);
   @override
   _GraphWidgetState createState() => _GraphWidgetState();
 }
 
 class _GraphWidgetState extends State<GraphWidget> {
-  var data;
-
-
-  @override
-  void initState() {
-    super.initState();
-
-    var r = Random();
-    data = List<double>.generate(30, (i) => r.nextDouble() * 1500);
-  }
 
   _onSelectionChanged(SelectionModel model) {
     final selectedDatum = model.selectedDatum;
 
     var time;
     final measures = <String, double>{};
-
-    // We get the model that updated with a list of [SeriesDatum] which is
-    // simply a pair of series & datum.
-    //
-    // Walk the selection updating the measures map, storing off the sales and
-    // series name for each selection point.
     if (selectedDatum.isNotEmpty) {
       time = selectedDatum.first.datum;
       selectedDatum.forEach((SeriesDatum datumPair) {
         measures[datumPair.series.displayName] = datumPair.datum;
       });
     }
-
     print(time);
     print(measures);
-
-    // Request a build.
-    //setState(() {
-    //_time = time;
-    //_measures = measures;
-    //});
   }
 
   @override
@@ -55,7 +34,7 @@ class _GraphWidgetState extends State<GraphWidget> {
         colorFn: (_, __) => MaterialPalette.blue.shadeDefault,
         domainFn: (value, index) => index,
         measureFn: (value, _) => value,
-        data: data,
+        data: widget.data,
         strokeWidthPxFn: (_, __) => 4,
       )
     ];

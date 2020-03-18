@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "212466185210",
+    "firebase_url": "https://budgetaplication.firebaseio.com",
+    "project_id": "budgetaplication",
+    "storage_bucket": "budgetaplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212466185210:android:aafcaa27fb7016139e6a43",
+        "android_client_info": {
+          "package_name": "com.example.navigation_bar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212466185210-869ptgs03hl7he0llnnr5n7jq81nst5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6xkzyLhWQEffAbcetlRWfagHwEkv3694"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212466185210-869ptgs03hl7he0llnnr5n7jq81nst5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
