@@ -11,7 +11,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
 
   PageController _pageController;
-  int currentPage = 2;
+  int currentPage = DateTime.now().month;
   Stream<QuerySnapshot> _query;
 
   @override
@@ -20,24 +20,25 @@ class _BodyState extends State<Body> {
 
     _query = Firestore.instance
       .collection('expenses')
-      .where("month", isEqualTo: currentPage + 1)
+      .where("month", isEqualTo: currentPage)
       .snapshots();
 
     _pageController = PageController(
-      initialPage: 9,
+      initialPage: currentPage,
       viewportFraction: 0.4,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Column(
         children: <Widget>[
           _selector(),
           StreamBuilder(
             stream: _query,
-            builder: (BuildContext conteext, AsyncSnapshot<QuerySnapshot> data) {
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> data) {
               if(data.hasData){
                 return MonthWidget(documents: data.data.documents);
               }
@@ -85,6 +86,7 @@ class _BodyState extends State<Body> {
   }
 
   Widget _selector() {
+
     return SizedBox.fromSize(
       size: Size.fromHeight(60.0),
       child: PageView(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:navigation_bar/pages/add_page.dart';
+
 
 import 'bloc/expenses_bloc.dart';
 import 'pages/home.dart';
@@ -18,7 +20,10 @@ class MyApp extends StatelessWidget {
       home: BlocProvider(
         create: (context) => ExpensesBloc(),
         child: Home(),
-      )
+      ),
+      routes: {
+        '/add' : (BuildContext context) => AddPage(),
+      }
     );
   }
 }
