@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/expenses_bloc.dart';
 import 'pages/home.dart';
 
 void main() => runApp(MyApp());
@@ -13,7 +15,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         primaryColor: Colors.white
       ),
-      home: Home()
+      home: BlocProvider(
+        create: (context) => ExpensesBloc(),
+        child: Home(),
+      )
     );
   }
 }
