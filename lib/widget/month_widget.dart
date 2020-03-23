@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:navigation_bar/util/graph_widget.dart';
+import 'package:intl/intl.dart';
+import 'package:navigation_bar/util/graph_bar_widget.dart';
 import 'package:navigation_bar/util/item.dart';
 import 'package:navigation_bar/util/separator.dart';
 
@@ -30,13 +30,11 @@ class MonthWidget extends StatefulWidget {
       return map;
     }), 
     super(key : key);
-
   @override
   _MonthWidgetState createState() => _MonthWidgetState();
 }
 
 class _MonthWidgetState extends State<MonthWidget> {
-
   @override
   Widget build(BuildContext context) {
 
@@ -50,10 +48,11 @@ class _MonthWidgetState extends State<MonthWidget> {
             child: _grafics(),
           ),
           Container(
-            color: Colors.blueAccent.withOpacity(0.15),
+            color: Color(0xFFf4f4f4),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
+                
                 child: Text(
                   "Detalle de gastos",
                   style: TextStyle(
@@ -71,14 +70,19 @@ class _MonthWidgetState extends State<MonthWidget> {
   }
 
   Widget _expensas() {
+
+    double totalAmount = widget.total;
+    final format = new NumberFormat("#,##0.00", "en_US");
+    
     return Column(
       children: <Widget>[
         Center(
           child: Text(
-            "\$${widget.total.toStringAsFixed(2)}",
+            "\$${format.format(totalAmount)}",
             style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 35.0,
+              fontWeight: FontWeight.bold,
+              fontSize: 30.0,
+              color: Color(0xFF0b1dab)
             ),
           ),
         ),
@@ -86,8 +90,8 @@ class _MonthWidgetState extends State<MonthWidget> {
           child: Text(
             "Total de gastos",
             style: TextStyle(
-              fontSize: 18.0,
-              color: Colors.blueGrey
+              fontSize: 15.0,
+              color: Color(0xFF0b1dab),
             ),
           ),
         ),
@@ -98,28 +102,29 @@ class _MonthWidgetState extends State<MonthWidget> {
   Widget _grafics() {
     return Container(
       height: 215,
-      child: GraphWidget(data: widget.perDay),
+      //child: GraphWidget(data: widget.perDay),
+      child: SimpleBarChart(data: widget.perDay),
     );
   }
 
   Widget _listData() {
     return Expanded(
       child: ListView.separated(
+        padding: const EdgeInsets.all(15.0),
         itemCount: widget.categories.keys.length,
         itemBuilder: (BuildContext context, int index) {
           var key = widget.categories.keys.elementAt(index);
           var data = widget.categories[key];
           return Item(
-            icon : FontAwesomeIcons.shoppingCart, 
             name: key, 
             percent: 100 * data ~/ widget.total, 
             amount: data
           );
         },
         separatorBuilder: (BuildContext context, int index) {
-          return Separator(space: 3.0,);
+          return Separator(space: 1.0,);
         },
       ),
     );
   }
-}
+}  

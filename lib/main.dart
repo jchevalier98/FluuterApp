@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_bar/pages/add_page.dart';
 
 import 'pages/home.dart';
 
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         primaryColor: Colors.white
       ),
-      home: Home()
+      routes: {
+        '/': (BuildContext context) => Home(),
+        '/add' : (BuildContext context) => AddPage(),
+      }
     );
   }
 }

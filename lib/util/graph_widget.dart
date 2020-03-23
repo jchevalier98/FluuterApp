@@ -16,14 +16,13 @@ class _GraphWidgetState extends State<GraphWidget> {
 
     var time;
     final measures = <String, double>{};
-    if (selectedDatum.isNotEmpty) {
+    if(selectedDatum.isNotEmpty) {
       time = selectedDatum.first.datum;
       selectedDatum.forEach((SeriesDatum datumPair) {
         measures[datumPair.series.displayName] = datumPair.datum;
       });
     }
     print(time);
-    print(measures);
   }
 
   @override
@@ -31,7 +30,7 @@ class _GraphWidgetState extends State<GraphWidget> {
     List<Series<double, num>> series = [
       Series<double, int>(
         id: 'Gasto',
-        colorFn: (_, __) => MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => MaterialPalette.red.shadeDefault,
         domainFn: (value, index) => index,
         measureFn: (value, _) => value,
         data: widget.data,
@@ -39,8 +38,9 @@ class _GraphWidgetState extends State<GraphWidget> {
       )
     ];
 
-    return LineChart(series,
-      animate: false,
+    return LineChart(
+      series,
+      animate: true,
       selectionModels: [
         SelectionModelConfig(
           type: SelectionModelType.info,
