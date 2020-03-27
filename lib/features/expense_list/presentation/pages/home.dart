@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_bar/widget/bottom_action.dart';
-import 'package:navigation_bar/pages/body.dart';
+
+import '../widget/bottom_action.dart';
+import 'body.dart';
 
 class Home extends StatelessWidget{
   

@@ -11,9 +11,10 @@ class ExpensesInitial extends ExpensesState {
 
 class ExpensesLoaded extends ExpensesState {
   final List<Expense> expenses;
-  ExpensesLoaded({this.expenses});
+  final List<ExpenseCategory> expensesCategories;
+  ExpensesLoaded({this.expenses, this.expensesCategories});
   @override
-  List<Object> get props => [expenses];
+  List<Object> get props => [expenses, expensesCategories];
 }
 
 class ExpensesLoading extends ExpensesState {

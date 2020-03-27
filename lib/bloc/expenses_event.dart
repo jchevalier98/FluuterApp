@@ -28,3 +28,9 @@ class EditExpense extends ExpensesEvent {
   List<Object> get props => [expense];
 }
 
+class LoadExpenses extends ExpensesEvent {
+  const LoadExpenses();
+
+  @override
+  List<Object> get props => [];
+}
