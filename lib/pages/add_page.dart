@@ -18,12 +18,12 @@ class _AddPageState extends State<AddPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0.0,
         title: Text(
           "Categoria",
           style: TextStyle(
-            color: Colors.blueGrey,
+            color: Color(0xFFc1c1c1),
             fontSize: 18.0,
             fontWeight: FontWeight.w500
           ),
@@ -34,7 +34,7 @@ class _AddPageState extends State<AddPage> {
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color(0xFF85e938).withOpacity(0.7),
+                color: Color(0xFF0b1dab).withOpacity(0.7),
               ),
               child: IconButton(
                 icon: Icon(
@@ -49,7 +49,10 @@ class _AddPageState extends State<AddPage> {
           )
         ],
       ),
-      body: _body(),
+      body: Container(
+        color: Colors.white,
+        child: _body()
+      ),
     );
   }
 
@@ -58,8 +61,11 @@ class _AddPageState extends State<AddPage> {
       children: <Widget>[
         _categorySelector(),
         _currentValue(),
-        _numpad(),
-        _submit()
+        Container(
+          padding: const EdgeInsets.all(15.0),
+          child: _submit()
+        ),
+        _numpad()
       ],
     );
   }
@@ -78,7 +84,6 @@ class _AddPageState extends State<AddPage> {
           "Ropa": FontAwesomeIcons.tshirt,
           "Alcohol": FontAwesomeIcons.beer,
           "Otros": Icons.beach_access,
-          //"Añadir": Icons.add,
         }, 
         onValueChanged: (newCategory) => category = newCategory,
       ),
@@ -94,7 +99,7 @@ class _AddPageState extends State<AddPage> {
         style: TextStyle(
           fontSize: 50.0,
           fontWeight: FontWeight.w500,
-          color: Colors.blueAccent
+          color: Color(0xFFc1c1c1),
         ),
       ),
     );
@@ -115,13 +120,24 @@ class _AddPageState extends State<AddPage> {
       },
       child: Container(
         height: heigth, 
-        color: Color(0xFF262aaa),
+        color: Colors.white,
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 35.0
+          child: Container(
+            padding: const EdgeInsets.all(15.0),
+            width: 70,
+            height: 70,
+            decoration: new BoxDecoration(
+              color: Color(0xFFd1d1d1),
+              shape: BoxShape.circle,
+            ),
+            child: new Center(
+              child: new Text(
+                text,
+                style: TextStyle(
+                  color: Color(0xFFd6d6d6),
+                  fontSize: 32.0
+                ),
+              ),
             ),
           )
         )
@@ -132,10 +148,10 @@ class _AddPageState extends State<AddPage> {
     return Expanded(
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraint) {
-          var heigth = constraint.biggest.height / 4;
+          var heigth = constraint.biggest.height / 5;
           return Table(
             border: TableBorder.all(
-              color: Color(0xFF262aaa),
+              color: Colors.white,
               width: 1.0
             ),
             children: [
@@ -162,7 +178,11 @@ class _AddPageState extends State<AddPage> {
               ),
               TableRow(
                 children: [
-                  _num(heigth, ','),
+                  Container(
+                    color: Colors.white,
+                    height : heigth,
+                    child: Text(""),
+                  ),
                   _num(heigth, '0'),
                   GestureDetector(
                     onTap: (){
@@ -171,7 +191,7 @@ class _AddPageState extends State<AddPage> {
                       });
                     },
                     child: Container(
-                      color: Color(0xFF262aaa),
+                      color: Colors.white,
                       height : heigth,
                       child: Center(
                         child: Icon(
@@ -199,10 +219,11 @@ class _AddPageState extends State<AddPage> {
           child: Container(
             height: 60.0,
             width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color(0xFF85e938),
-            ),
             child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(10.0),
+              ),
+              color: Color(0xFF0b1dab),
               child: Text(
                 "Guardar",
                 style: TextStyle(
@@ -225,7 +246,7 @@ class _AddPageState extends State<AddPage> {
                 }
                 else{
                   Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text("Recuerde seleccionar la cateegoria y monto"),)
+                    SnackBar(content: Text("Recuerde seleccionar la categoria y monto"),)
                   );
                 }
               }

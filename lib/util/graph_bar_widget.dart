@@ -29,6 +29,7 @@ class _SimpleBarChartState extends State<SimpleBarChart>{
   @override
   Widget build(BuildContext context) {
 
+    print('----> ${widget.data}');
     final expenses = new List<DayOfMonth>();
     for(int i = 0; i < widget.data.length; i++){
       print(widget.data[i].toString());
@@ -38,22 +39,23 @@ class _SimpleBarChartState extends State<SimpleBarChart>{
     List<Series<DayOfMonth, String>> series = [
       Series<DayOfMonth, String>(
         id: 'Mobile',
-        colorFn: (_, __) => MaterialPalette.red.shadeDefault,
-        domainFn: (DayOfMonth index, _) => index.year,
-        measureFn: (DayOfMonth index, _) => index.sales,
+        domainFn: (DayOfMonth index, _) => index.day,
+        measureFn: (DayOfMonth index, _) => index.amount,
         data: expenses,
-        strokeWidthPxFn: (_, __) => 4,
+        colorFn: (_, __) => MaterialPalette.blue.shadeDefault,
+        fillColorFn: (_, __) =>
+            MaterialPalette.blue.shadeDefault.lighter,
       )
     ];
 
     final staticTicks = <TickSpec<String>>[
-      TickSpec('0', label: '01'),
-      TickSpec('4', label: '05'),
-      TickSpec('9', label: '10'),
-      TickSpec('14', label: '15'),
-      TickSpec('19', label: '20'),
-      TickSpec('24', label: '25'),
-      TickSpec('29', label: '30'),
+      TickSpec('0', label: '01', style: new TextStyleSpec(color: new Color(r: 0x192, g: 0x192, b: 0x192))),
+      TickSpec('4', label: '05', style: new TextStyleSpec(color: new Color(r: 0x192, g: 0x192, b: 0x192))),
+      TickSpec('9', label: '10', style: new TextStyleSpec(color: new Color(r: 0x192, g: 0x192, b: 0x192))),
+      TickSpec('14', label: '15', style: new TextStyleSpec(color: new Color(r: 0x192, g: 0x192, b: 0x192))),
+      TickSpec('19', label: '20', style: new TextStyleSpec(color: new Color(r: 0x192, g: 0x192, b: 0x192))),
+      TickSpec('24', label: '25', style: new TextStyleSpec(color: new Color(r: 0x192, g: 0x192, b: 0x192))),
+      TickSpec('29', label: '30', style: new TextStyleSpec(color: new Color(r: 0x192, g: 0x192, b: 0x192))),
     ];
 
     return BarChart(
@@ -68,14 +70,14 @@ class _SimpleBarChartState extends State<SimpleBarChart>{
       domainAxis: new OrdinalAxisSpec(
         tickProviderSpec: new StaticOrdinalTickProviderSpec(staticTicks)
       ),
+      barGroupingType: BarGroupingType.stacked,
     );
   }
 }
 
-/// Sample ordinal data type.
 class DayOfMonth {
-  final String year;
-  final double sales;
+  final String day;
+  final double amount;
 
-  DayOfMonth(this.year, this.sales);
+  DayOfMonth(this.day, this.amount);
 }

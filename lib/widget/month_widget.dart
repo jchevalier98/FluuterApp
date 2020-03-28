@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:navigation_bar/util/chart.dart';
 import 'package:navigation_bar/util/graph_bar_widget.dart';
 import 'package:navigation_bar/util/item.dart';
 import 'package:navigation_bar/util/separator.dart';
@@ -25,11 +26,11 @@ class MonthWidget extends StatefulWidget {
       if(!map.containsKey(document['category'])){
         map[document['category']] = 0;
       }
-
       map[document['category']] += document['amount'];
       return map;
     }), 
     super(key : key);
+    
   @override
   _MonthWidgetState createState() => _MonthWidgetState();
 }
@@ -38,13 +39,11 @@ class _MonthWidgetState extends State<MonthWidget> {
   @override
   Widget build(BuildContext context) {
 
-    print(widget.categories);
     return Expanded(
       child: Column(
         children: <Widget>[
           _expensas(),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
+          Card(
             child: _grafics(),
           ),
           Container(
@@ -52,7 +51,6 @@ class _MonthWidgetState extends State<MonthWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
-                
                 child: Text(
                   "Detalle de gastos",
                   style: TextStyle(
@@ -74,35 +72,38 @@ class _MonthWidgetState extends State<MonthWidget> {
     double totalAmount = widget.total;
     final format = new NumberFormat("#,##0.00", "en_US");
     
-    return Column(
-      children: <Widget>[
-        Center(
-          child: Text(
-            "\$${format.format(totalAmount)}",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 30.0,
-              color: Color(0xFF0b1dab)
+    return Container(
+      padding: const EdgeInsets.all(5.0),
+      child: Column(
+        children: <Widget>[
+          Center(
+            child: Text(
+              "\$${format.format(totalAmount)}",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30.0,
+                color: Color(0xFF0b1dab)
+              ),
             ),
           ),
-        ),
-        Center(
-          child: Text(
-            "Total de gastos",
-            style: TextStyle(
-              fontSize: 15.0,
-              color: Color(0xFF0b1dab),
+          Center(
+            child: Text(
+              "Total de gastos",
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Color(0xFF0b1dab),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _grafics() {
     return Container(
+      padding: const EdgeInsets.all(8.0),
       height: 215,
-      //child: GraphWidget(data: widget.perDay),
       child: SimpleBarChart(data: widget.perDay),
     );
   }

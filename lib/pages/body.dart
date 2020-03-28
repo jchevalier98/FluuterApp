@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:navigation_bar/widget/month.dart';
 import 'package:navigation_bar/widget/month_widget.dart';
 
@@ -11,21 +12,22 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
 
   PageController _pageController;
-  int currentPage = DateTime.now().month;
+  int currentPage = DateTime.now().month -1;
   Stream<QuerySnapshot> _query;
+  Colors colorStatus;
 
   @override
   void initState(){
-    super.initState();
 
+    super.initState();
     _query = Firestore.instance
       .collection('expenses')
-      .where("month", isEqualTo: currentPage)
+      .where("month", isEqualTo: DateTime.now().month)
       .snapshots();
 
     _pageController = PageController(
       initialPage: currentPage,
-      viewportFraction: 0.4,
+      viewportFraction: 0.3,
     );
   }
 
@@ -35,7 +37,9 @@ class _BodyState extends State<Body> {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          _selector(),
+          Container(
+            child: _selector()
+          ),
           StreamBuilder(
             stream: _query,
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> data) {
@@ -53,6 +57,7 @@ class _BodyState extends State<Body> {
   }
 
   Widget _pageItem(String name, int position){
+
     var _alignment;
     var styleText; 
     final selected = TextStyle(
@@ -80,15 +85,14 @@ class _BodyState extends State<Body> {
     }
 
     return Align(
-      alignment: _alignment,
+      alignment: Alignment.centerLeft,
       child: MonthText(month: name, styleText: styleText,)
     );
   }
 
   Widget _selector() {
-
     return SizedBox.fromSize(
-      size: Size.fromHeight(60.0),
+      size: Size.fromHeight(50.0),
       child: PageView(
         onPageChanged: (newPage) {
           setState(() {
