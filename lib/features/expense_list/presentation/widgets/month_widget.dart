@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../bloc/expense_categories_bloc.dart';
-import '../util/graph_bar_widget.dart';
-import '../widgets/monthly_expenses_widget.dart';
+import 'monthly_expenses_widget.dart';
+import 'util/graph_bar_widget.dart';
 
 class MonthWidget extends StatelessWidget {
   MonthWidget();

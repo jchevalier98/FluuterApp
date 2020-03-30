@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/expense_categories_bloc.dart';
-import '../util/item.dart';
-import '../util/separator.dart';
+import 'util/item.dart';
+import 'util/separator.dart';
 
 class MonthlyExpensesList extends StatelessWidget {
 

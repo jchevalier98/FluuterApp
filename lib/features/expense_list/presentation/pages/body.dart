@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:navigation_bar/features/expense_list/presentation/widget/month.dart';
-import 'package:navigation_bar/features/expense_list/presentation/widget/month_widget.dart';
+import 'package:navigation_bar/features/expense_list/presentation/widgets/month.dart';
+import 'package:navigation_bar/features/expense_list/presentation/widgets/month_widget.dart';
 
 class Body extends StatefulWidget {
   @override
