@@ -34,28 +34,7 @@ class _BodyState extends State<Body> {
       child: Column(
         children: <Widget>[
           _selector(),
-          // BlocBuilder<ExpensesBloc, ExpensesState>(
-          //   builder: (context, state) {
-          //     if (state is ExpensesLoaded) {
-          //       return MonthWidget(
-          //         expenses: state.expenses,
-          //       );
-          //     } else if (state is ExpensesLoading) {
-          //       return CircularProgressIndicator();
-          //     }
-          //   },
-          // ),
-          StreamBuilder(
-              stream: _query,
-              builder:
-                  (BuildContext context, AsyncSnapshot<QuerySnapshot> data) {
-                if (data.hasData) {
-                  return MonthWidget(documents: data.data.documents);
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }),
+          MonthWidget(),
         ],
       ),
     );
