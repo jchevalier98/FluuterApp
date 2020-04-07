@@ -2,20 +2,26 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:navigation_bar/features/expense_list/data/models/category.dart';
-import 'package:navigation_bar/features/expense_list/data/models/expense.dart';
+import 'package:meta/meta.dart';
 
-import '../../data/repositories/expenses_category_repository.dart';
-import '../../data/repositories/expenses_repository.dart';
+import '../../data/models/category.dart';
+import '../../domain/entities/expense.dart';
+import '../../domain/usecases/get_expenses.dart';
+import '../../domain/usecases/get_total.dart';
 
 part 'expenses_event.dart';
 part 'expenses_state.dart';
 
 class ExpensesBloc extends Bloc<ExpensesEvent, ExpensesState> {
-  final ExpensesRepository repository;
-  final ExpensesCategoryRepository categoriesRepository;
+  final GetExpenses getExpenses;
+  final GetTotal getTotal;
 
-  ExpensesBloc({this.repository, this.categoriesRepository});
+  ExpensesBloc({
+    @required GetTotal getTotal,
+    @required GetExpenses usecase,
+  })  : assert(usecase != null, getTotal != null),
+        getExpenses = usecase,
+        getTotal = getTotal;
 
   @override
   ExpensesState get initialState => ExpensesInitial();
@@ -26,20 +32,16 @@ class ExpensesBloc extends Bloc<ExpensesEvent, ExpensesState> {
   ) async* {
     yield ExpensesLoading();
     if (event is LoadExpenses) {
-      repository.initializeRepository();
-      final expenses = await repository.expenses;
-      yield ExpensesLoaded(expenses: expenses, expensesCategories: []);
-    } else if (event is AddExpense) {
-      repository.addExpense(event.expense);
-      repository.initializeRepository();
-      final expenses = await repository.expenses;
-      yield ExpensesLoaded(expenses: expenses);
-    } else if (event is RemoveExpense) {
-      // TODO: Añadir la lógica para remover un gasto
-      yield ExpensesLoaded(expenses: await repository.expenses);
-    } else if (event is EditExpense) {
-      // TODO: Añadir la lógica para remover un gasto
-      yield ExpensesLoaded(expenses: await repository.expenses);
+      final expenses = await getExpenses(NoParams());
+      yield expenses.fold(
+        (failure) => ExpensesError(),
+        (expense) => ExpensesLoaded(
+          expenses: expense,
+          expensesCategories: [
+            ExpenseCategory(name: "Otros", total: 25.00),
+          ],
+        ),
+      );
     } else {
       yield ExpensesError();
     }

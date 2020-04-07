@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../bloc/expense_categories_bloc.dart';
+import '../bloc/expenses_bloc.dart';
 import 'monthly_expenses_widget.dart';
 import 'util/graph_bar_widget.dart';
 
@@ -11,9 +11,8 @@ class MonthWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ExpenseCategoriesBloc, ExpenseCategoriesState>(
-        builder: (context, state) {
-      if (state is ExpenseCategoriesLoaded) {
+    return BlocBuilder<ExpensesBloc, ExpensesState>(builder: (context, state) {
+      if (state is ExpensesLoaded) {
         return Expanded(
             child: Column(
           children: <Widget>[
@@ -34,7 +33,7 @@ class MonthWidget extends StatelessWidget {
             MonthlyExpensesList(),
           ],
         ));
-      } else if (state is ExpenseCategoriesLoading) {
+      } else if (state is ExpensesLoaded) {
         return CircularProgressIndicator();
       } else {
         return LoadExpensesButton();
@@ -45,9 +44,9 @@ class MonthWidget extends StatelessWidget {
   Widget _expensas(BuildContext context) {
     final format = new NumberFormat("#,##0.00", "en_US");
 
-    return BlocBuilder<ExpenseCategoriesBloc, ExpenseCategoriesState>(
+    return BlocBuilder<ExpensesBloc, ExpensesState>(
       builder: (context, state) {
-        if (state is ExpenseCategoriesLoaded) {
+        if (state is ExpensesLoaded) {
           return Column(
             children: <Widget>[
               Center(
@@ -70,7 +69,7 @@ class MonthWidget extends StatelessWidget {
               ),
             ],
           );
-        } else if (state is ExpenseCategoriesLoading) {
+        } else if (state is ExpensesLoading) {
           return CircularProgressIndicator();
         } else {
           return Text("No cargado");
@@ -80,9 +79,8 @@ class MonthWidget extends StatelessWidget {
   }
 
   Widget _grafics() {
-    return BlocBuilder<ExpenseCategoriesBloc, ExpenseCategoriesState>(
-        builder: (context, state) {
-      if (state is ExpenseCategoriesLoaded) {
+    return BlocBuilder<ExpensesBloc, ExpensesState>(builder: (context, state) {
+      if (state is ExpensesLoaded) {
         return Container(
           height: 215,
           child: SimpleBarChart(data: state.perDay),
@@ -97,16 +95,15 @@ class MonthWidget extends StatelessWidget {
 class LoadExpensesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ExpenseCategoriesBloc, ExpenseCategoriesState>(
+    return BlocBuilder<ExpensesBloc, ExpensesState>(
       builder: (context, state) {
         return Center(
           child: RaisedButton(
             child: Center(child: Text("Cargar gastos")),
             onPressed: () {
-              final expensesCategoriesBloc =
-                  BlocProvider.of<ExpenseCategoriesBloc>(context);
-              expensesCategoriesBloc.add(
-                LoadExpenseCategoriesEvent(),
+              final expensesBloc = BlocProvider.of<ExpensesBloc>(context);
+              expensesBloc.add(
+                LoadExpenses(),
               );
             },
           ),

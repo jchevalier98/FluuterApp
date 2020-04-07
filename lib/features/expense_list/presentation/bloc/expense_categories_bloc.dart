@@ -5,8 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/models/category.dart';
-import '../../data/models/expense.dart';
 import '../../data/repositories/expenses_category_repository.dart';
+import '../../domain/entities/expense.dart';
 import 'expenses_bloc.dart';
 
 part 'expense_categories_event.dart';
@@ -34,7 +34,8 @@ class ExpenseCategoriesBloc
       final categories = await repository.categories;
       final total = await repository.total;
       final perDay = await repository.perDay;
-      yield ExpenseCategoriesLoaded(categories: categories, total: total, perDay: perDay);
+      yield ExpenseCategoriesLoaded(
+          categories: categories, total: total, perDay: perDay);
     } else {
       yield ExpenseCategoriesLoading();
     }

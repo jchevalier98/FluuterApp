@@ -1,20 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
-import 'package:navigation_bar/features/expense_list/data/models/expense.dart';
 
-abstract class FirebaseExpensesDataSource {
+import '../../domain/entities/expense.dart';
+
+abstract class ExpenseDataSource {
   Future<List<Expense>> getExpenses();
 }
 
-class FirebaseExpensesDataSourceImpl implements FirebaseExpensesDataSource {
+class FirebaseExpensesDataSource implements ExpenseDataSource {
   List<Expense> _expenses = [];
   final logger = Logger();
-  List<DocumentSnapshot> _documents = [];
   int currentPage = DateTime.now().month;
 
+  List<DocumentSnapshot> _documents = [];
   Stream<QuerySnapshot> _query;
 
-  FirebaseExpensesDataSourceImpl() {
+  FirebaseExpensesDataSource() {
     initializeRepository();
   }
 
@@ -37,13 +38,12 @@ class FirebaseExpensesDataSourceImpl implements FirebaseExpensesDataSource {
             id: "019"));
       }),
     );
-    
     logger.i("Cargando desde Firebase");
   }
+
   void addExpense(Expense expense) {
     _expenses.add(expense);
   }
-
 
   @override
   Future<List<Expense>> getExpenses() {

@@ -8,11 +8,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  equatable: ^1.1.1
+  equatable: ^0.6.1
   logger: ^0.8.3
+  dartz: ^0.8.9
+  data_connection_checker: ^0.3.4
+  get_it: ^4.0.1
 
   cupertino_icons: ^0.1.2
-  flutter_bloc: ^2.1.1
+  flutter_bloc: ^1.0.0
   font_awesome_flutter: ^8.4.0
   charts_flutter: ^0.6.0
   cloud_firestore: ^0.13.4+2
@@ -21,6 +24,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^4.1.1
 
 flutter:
   uses-material-design: true
