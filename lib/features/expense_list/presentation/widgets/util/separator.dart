@@ -8,7 +8,7 @@ class Separator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blueAccent.withOpacity(0.15),
+      color: Colors.grey.withOpacity(0.15),
       height: space,
     );
   }

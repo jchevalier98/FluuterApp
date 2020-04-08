@@ -4,7 +4,8 @@ class BottomBar extends StatelessWidget {
 
   final IconData icon;
   final bool isSelected;
-  const BottomBar({Key key, this.icon, this.isSelected = false}) : super(key: key);
+  final String page;
+  const BottomBar({Key key, this.icon, this.isSelected = false, this.page}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -13,11 +14,12 @@ class BottomBar extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: Icon(
           icon,
-          //color: const Color(0xFF262AAA),
-          color: isSelected ? Color(0xFF262AAA) : Color(0xFF5458d8),
+          color: isSelected ? Color(0xFF262AAA) : Colors.grey.withOpacity(0.9),
         )
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(page);
+      },
     );
   }
-}
+} 

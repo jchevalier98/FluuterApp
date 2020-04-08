@@ -10,10 +10,7 @@ class MonthText extends StatelessWidget {
     return Center(
       child: Text(
         "$month",
-        style: styleText/*TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 16.0,
-        ),*/
+        style: styleText
       ),
     );
   }
