@@ -1,3 +1,3 @@
-export 'expense_list_bloc.dart';
-export 'expense_list_event.dart';
-export 'expense_list_state.dart';
+export 'expenses_bloc.dart';
+export 'expenses_state.dart';
+export 'expenses_event.dart';

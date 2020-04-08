@@ -1,4 +1,7 @@
-part of 'expenses_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:navigation_bar/features/expense_list/data/models/category.dart';
+import 'package:navigation_bar/features/expense_list/domain/entities/expense.dart';
+import 'package:meta/meta.dart';
 
 abstract class ExpensesState extends Equatable {
   const ExpensesState();
@@ -10,11 +13,16 @@ class ExpensesInitial extends ExpensesState {
 }
 
 class ExpensesLoaded extends ExpensesState {
-  final perDay = [0.0, 31.0];
-  final total = 20.00;
+  final perDay;
+  final total;
   final List<Expense> expenses;
   final List<ExpenseCategory> expensesCategories;
-  ExpensesLoaded({this.expenses, this.expensesCategories});
+  ExpensesLoaded({
+    @required this.perDay,
+    @required this.total,
+    @required this.expenses,
+    @required this.expensesCategories,
+  });
   @override
   List<Object> get props => [expenses, expensesCategories];
 }

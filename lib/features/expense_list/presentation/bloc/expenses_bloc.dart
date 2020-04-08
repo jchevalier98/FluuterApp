@@ -1,27 +1,31 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../data/models/category.dart';
-import '../../domain/entities/expense.dart';
+import '../../../../core/error/failure.dart';
+import '../../domain/usecases/get_categories.dart';
 import '../../domain/usecases/get_expenses.dart';
 import '../../domain/usecases/get_total.dart';
-
-part 'expenses_event.dart';
-part 'expenses_state.dart';
+import '../../domain/usecases/get_total_per_day.dart';
+import 'bloc.dart';
 
 class ExpensesBloc extends Bloc<ExpensesEvent, ExpensesState> {
   final GetExpenses getExpenses;
   final GetTotal getTotal;
+  final GetTotalPerDay perDay;
+  final GetCategories getCategories;
 
-  ExpensesBloc({
-    @required GetTotal getTotal,
-    @required GetExpenses usecase,
-  })  : assert(usecase != null, getTotal != null),
+  ExpensesBloc(
+      {@required GetTotalPerDay perDay,
+      @required GetTotal getTotal,
+      @required GetExpenses usecase,
+      @required GetCategories getCategories})
+      : assert(usecase != null, getTotal != null),
         getExpenses = usecase,
-        getTotal = getTotal;
+        getTotal = getTotal,
+        perDay = perDay,
+        getCategories = getCategories;
 
   @override
   ExpensesState get initialState => ExpensesInitial();
@@ -32,14 +36,19 @@ class ExpensesBloc extends Bloc<ExpensesEvent, ExpensesState> {
   ) async* {
     yield ExpensesLoading();
     if (event is LoadExpenses) {
+      // TODO: Hay que revisar como se manejan estos casos. Lo ideal sería separar en diversos estados
       final expenses = await getExpenses(NoParams());
+      final pd = await perDay(NoParams());
+      final tot = await getTotal(NoParams());
+      final categories = await getCategories(NoParams());
       yield expenses.fold(
         (failure) => ExpensesError(),
         (expense) => ExpensesLoaded(
           expenses: expense,
-          expensesCategories: [
-            ExpenseCategory(name: "Otros", total: 25.00),
-          ],
+          expensesCategories:
+              categories.fold((failure) => [], (categories) => categories),
+          perDay: pd.fold((failure) => GeneralFailure(), (perDay) => perDay),
+          total: tot.fold((failure) => GeneralFailure(), (total) => total),
         ),
       );
     } else {

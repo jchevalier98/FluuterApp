@@ -10,7 +10,7 @@ abstract class ExpenseDataSource {
 class FirebaseExpensesDataSource implements ExpenseDataSource {
   List<Expense> _expenses = [];
   final logger = Logger();
-  int currentPage = DateTime.now().month;
+  int currentPage = DateTime.now().month - 1;
 
   List<DocumentSnapshot> _documents = [];
   Stream<QuerySnapshot> _query;

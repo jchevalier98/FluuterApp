@@ -1,4 +1,6 @@
-part of 'expenses_bloc.dart';
+import 'package:equatable/equatable.dart';
+
+import '../../domain/entities/expense.dart';
 
 abstract class ExpensesEvent extends Equatable {
   const ExpensesEvent();
