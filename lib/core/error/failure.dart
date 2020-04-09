@@ -7,4 +7,7 @@ abstract class Failure extends Equatable {
 
 class GeneralFailure implements Failure {
   List<Object> get props => null;
+
+  @override
+  bool get stringify => false;
 }
