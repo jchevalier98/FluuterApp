@@ -33,8 +33,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      builder: (context) => sl<ExpensesBloc>(),
+      create: (context) => sl<ExpensesBloc>(),
       child: Home(),
     );
   }
 }
+
+
